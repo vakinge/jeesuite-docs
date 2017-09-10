@@ -90,54 +90,56 @@ cache模块实现了
 * cacheNames：需要开启一级缓存缓存组，不配置实际上一级缓存就不生效。按目前自动缓存key规则（namespace.key:value）,namespace即为cacheName
 
 #### 使用和基本语法
-
-```
-   //字符串
-        RedisString redisString = new RedisString("User.id:1001");
-        redisString.set("user1001",60);
-        String value = redisString.get();
-
-        redisString.getTtl();
-        redisString.exists();
-        redisString.setExpire(300);
-        redisString.remove();
-
-        //对象
-        RedisObject redisObject = new RedisObject("User.id:1001");
-        redisObject.set(new User(1001, "jack"));
-        Object user = redisObject.get();
-        redisObject.getTtl();
-        redisObject.exists();
-        redisObject.setExpire(300);
-        redisObject.remove();
-
-        //hash 
-        RedisHashMap redisHashMap = new RedisHashMap("User.all");
-        redisHashMap.set("1001", new User(1001, "jack"));
-        redisHashMap.set("1002", new User(1002, "jack2"));
-
-        Map<String, User> users = redisHashMap.get("1001","1002");
-        users = redisHashMap.getAll();
-        User one = redisHashMap.getOne("1001");
-
-        redisHashMap.containsKey("1001");
-
-        redisHashMap.remove();
-
-        //指定缓存服务组名
-        //new RedisObject(key, groupName)
-        new RedisObject("User.id:1001", "session_cache");
-```
-
-其他还有：
-
+* RedisString
+* RedisObject
 * RedisList
+* RedisStrList
 * RedisNumber
 * RedisSet
+* RedisStrSet
 * RedisSortSet
 * RedisStrSortSet
+* RedisHashMap
+* RedisStrHashMap
 
-* RedisList
+```
+//字符串
+RedisString redisString = new RedisString("User.id:1001");
+redisString.set("user1001", 60);
+String value = redisString.get();
+
+redisString.getTtl();
+redisString.exists();
+redisString.setExpire(300);
+redisString.remove();
+
+//对象
+RedisObject redisObject = new RedisObject("User.id:1001");
+redisObject.set(new User(1001, "jack"));
+Object user = redisObject.get();
+redisObject.getTtl();
+redisObject.exists();
+redisObject.setExpire(300);
+redisObject.remove();
+
+//hash 
+RedisHashMap redisHashMap = new RedisHashMap("User.all");
+redisHashMap.set("1001", new User(1001, "jack"));
+redisHashMap.set("1002", new User(1002, "jack2"));
+
+Map < String,
+User > users = redisHashMap.get("1001", "1002");
+users = redisHashMap.getAll();
+User one = redisHashMap.getOne("1001");
+
+redisHashMap.containsKey("1001");
+
+redisHashMap.remove();
+
+//指定缓存服务组名
+//new RedisObject(key, groupName)
+new RedisObject("User.id:1001", "session_cache");
+```
 
 如果这些封装不满足你的需求这些你需要用其他的可以直接通过一下方式调用jedis原生API：
 
