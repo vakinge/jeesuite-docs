@@ -135,6 +135,9 @@ cache模块实现了
 * RedisNumber
 * RedisSet
 * RedisSortSet
+* RedisStrSortSet
+
+* RedisList
 
 如果这些封装不满足你的需求这些你需要用其他的可以直接通过一下方式调用jedis原生API：
 
