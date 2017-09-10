@@ -90,6 +90,7 @@ cache模块实现了
 * cacheNames：需要开启一级缓存缓存组，不配置实际上一级缓存就不生效。按目前自动缓存key规则（namespace.key:value）,namespace即为cacheName
 
 #### 使用和基本语法
+
 * RedisString
 * RedisObject
 * RedisList
@@ -102,7 +103,7 @@ cache模块实现了
 * RedisHashMap
 * RedisStrHashMap
 
-```
+```java
 //字符串
 RedisString redisString = new RedisString("User.id:1001");
 redisString.set("user1001", 60);
