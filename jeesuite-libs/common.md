@@ -2,7 +2,8 @@
 
 * 加密类：AES,DES,RSA,Base64，SHA1，SimpleCryptUtils\(可逆加密\)，DigestUtils\(MD5、MD5短码\)
 * HttpUtils:基于HttpURLConnection实现的http操作工具类，无第三方依赖，适用简单无性能要求场景。
-   ```
+
+  ```
         HttpResponseEntity responseEntity = HttpUtils.get("http://192.168.1.89:9082/info");
         //上传文件
         HttpRequestEntity entity = HttpRequestEntity.create()
@@ -26,16 +27,17 @@
   ```
 
 * JSON:JsonUtils
+
 * 序列化：FSTSerializer，JavaSerializer，KryoSerializer，KryoPoolSerializer
 * 包扫描：PackageScanner
-* BeanCopyUtils
-* DateUtils
-* FormatValidateUtils
-* HashUtils
-* JDBCUtils
-* ReflectUtils
-* ResourceUtils
-* NodeNameHolder
+* BeanCopyUtils：bean之间值复制工具类，比BeanUtils效率高
+* DateUtils：常用日期函数，与common-lang包日期函数互补
+* FormatValidateUtils：常用格式校验工具
+* HashUtils：MurMurHash算法实现的hash算法
+* JDBCUtils：jdbc工具
+* ReflectUtils：反射工具
+* ResourceUtils：属性读取工具
+* NodeNameHolder：全局节点名称
 
 
 
