@@ -33,6 +33,7 @@
 * 包扫描：PackageScanner
 
 * BeanCopyUtils：bean之间值复制工具类，比BeanUtils效率高
+
 * DateUtils：常用日期函数，与common-lang包日期函数互补
 * FormatValidateUtils：常用格式校验工具
 * HashUtils：MurMurHash算法实现的hash算法
