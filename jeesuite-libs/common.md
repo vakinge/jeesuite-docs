@@ -19,7 +19,7 @@
                                        .addTextParam("password", "123456"));
 
         //post json
-        responseEntity = HttpUtils.postJson("http://192.168.1.89:9082/delete", "{'id':'1000'}", DEFAULT_CHARSET);
+        responseEntity = HttpUtils.postJson("http://192.168.1.89:9082/delete", "{'id':'1000'}", "utf-8");
 
         if(responseEntity.isSuccessed()){
             System.out.println(responseEntity.getBody());
@@ -31,6 +31,7 @@
 * 序列化：FSTSerializer，JavaSerializer，KryoSerializer，KryoPoolSerializer
 
 * 包扫描：PackageScanner
+
 * BeanCopyUtils：bean之间值复制工具类，比BeanUtils效率高
 * DateUtils：常用日期函数，与common-lang包日期函数互补
 * FormatValidateUtils：常用格式校验工具
