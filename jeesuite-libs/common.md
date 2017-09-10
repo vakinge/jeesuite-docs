@@ -2,8 +2,7 @@
 
 * 加密类：AES,DES,RSA,Base64，SHA1，SimpleCryptUtils\(可逆加密\)，DigestUtils\(MD5、MD5短码\)
 * HttpUtils:基于HttpURLConnection实现的http操作工具类，无第三方依赖，适用简单无性能要求场景。
-
-```
+   ```
         HttpResponseEntity responseEntity = HttpUtils.get("http://192.168.1.89:9082/info");
         //上传文件
         HttpRequestEntity entity = HttpRequestEntity.create()
@@ -24,7 +23,7 @@
         if(responseEntity.isSuccessed()){
             System.out.println(responseEntity.getBody());
          }
-```
+  ```
 
 * JsonUtils:基于jackson包封装。
   ```
