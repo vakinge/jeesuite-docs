@@ -1,6 +1,6 @@
 ### 功能说明
 
-common模块提供基础工具类，与common-lang3互补。
+common模块提供基础工具类，依赖common-lang3。
 
 ### 使用说明
 
@@ -51,6 +51,7 @@ common模块提供基础工具类，与common-lang3互补。
 * DateUtils：常用日期函数，与common-lang包日期函数互补
 
 * FormatValidateUtils：常用格式校验工具
+
 * HashUtils：MurMurHash算法实现的hash算法
 * JDBCUtils：jdbc工具
 * ReflectUtils：反射工具
