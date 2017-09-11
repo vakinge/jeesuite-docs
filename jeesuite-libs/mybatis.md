@@ -1,13 +1,12 @@
 ### 功能说明
 
-- 代码生成、自动CRUD、可无缝对接mybaits增强框架`Mapper`
-- 基于properties配置多数据源支持，无需修改XML
-- 读写分离，事务内操作强制读主库
-- 基于注解自动缓存管理（所有查询方法结果自动缓存、自动更新，事务回滚缓存同步回滚机制）
-- 自动缓存实现基于`jeesuite-cache`和`spring-data-redis`
-- 分页组件
-- 简单分库路由（不支持join等跨库操作）
-
+* 代码生成、自动CRUD、可无缝对接mybaits增强框架`Mapper`
+* 基于properties配置多数据源支持，无需修改XML
+* 读写分离，事务内操作强制读主库
+* 基于注解自动缓存管理（所有查询方法结果自动缓存、自动更新，事务回滚缓存同步回滚机制）
+* 自动缓存实现基于`jeesuite-cache`和`spring-data-redis`
+* 分页组件
+* 简单分库路由（不支持join等跨库操作）
 
 ### 使用说明
 
@@ -22,19 +21,22 @@
 ```
 
 #### 一些说明
+
 ##### 代码生成及其自动crud
 
 已实现方法
-- getByKey
-- insert
-- insertSelective
-- updateByKey
-- updateByKeySelective
-- deleteByKey
-- selectAll
+
+* getByKey
+* insert
+* insertSelective
+* updateByKey
+* updateByKeySelective
+* deleteByKey
+* selectAll
 
 ### 特别说明：
-- 已经无缝对接优秀的mybatis增强框架 [Mapper](http://git.oschina.net/free/Mapper) ，该框架功能强大，该部分推荐集成Mapper框架。
+
+* 已经无缝对接优秀的mybatis增强框架 [Mapper](http://git.oschina.net/free/Mapper) ，该框架功能强大，该部分推荐集成Mapper框架。
 
 ```
 <dependency>
@@ -43,8 +45,11 @@
     <version>[<=3.4.3测试过]</version>
 </dependency>
 ```
+
 ---
+
 ##### 其他功能说明
+
 * 读写分离
   1. 根据执行sql类型自动路由master/slave库
   2. 支持基于properties文件动态扩展slave节点
@@ -53,13 +58,14 @@
   1. 支持所有mapper自定义查询方法自动缓存管理（自动缓存、自动更新）
   2. 支持通过@CacheEvictCascade注解，级联缓存更新
   3. 支持通过EntityCacheHelper手动写入/更新缓存并自动纳入自动管理体系
+  4. 防止缓存穿透，可配置缓存null值并自动更新
 * 分库路由
   1. 只适用基本的分库路由，不支持跨库join等，未经过严格测试也没上过生产系统（只当个研究用）。
 * 分页
   1. 支持通过标注或者定义page方法实现物理分页
- 
 
 #### 配置
+
 ```
 #mysql global config
 db.group.size=1
@@ -106,14 +112,15 @@ group1.slave1.db.url=jdbc:mysql://localhost:3306/demo_db2?seUnicode=true&amp;cha
 group1.slave1.db.username=root
 group1.slave1.db.password=123456
 ```
+
 说明
-- `slave`序列从1开始,`group`序列从0开始(第一组group0默认省略，slave1~n,group1~n依次递增) 
-- 每个数据源的配置会覆盖全局配置
-- `db.group.size` 与 `db.shard.size` 都是分库用到配置，没有用到分库可以不配置
 
+* `slave`序列从1开始,`group`序列从0开始\(第一组group0默认省略，slave1~n,group1~n依次递增\) 
+* 每个数据源的配置会覆盖全局配置
+* `db.group.size` 与 `db.shard.size` 都是分库用到配置，没有用到分库可以不配置
 
+##### spring配置
 
-#####  spring配置
 ```
     <!--除了datasource配置外，其他都与原生配置一样-->
     <bean id="routeDataSource" class="com.jeesuite.mybatis.datasource.MutiRouteDataSource">
@@ -125,52 +132,56 @@ group1.slave1.db.password=123456
         -->
     </bean>
 
-	<bean id="transactionTemplate"
-		class="org.springframework.transaction.support.TransactionTemplate">
-		<property name="transactionManager" ref="transactionManager" />
-		<property name="isolationLevelName" value="ISOLATION_DEFAULT" />
-		<property name="propagationBehaviorName" value="PROPAGATION_REQUIRED" />
-	</bean>
+    <bean id="transactionTemplate"
+        class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="isolationLevelName" value="ISOLATION_DEFAULT" />
+        <property name="propagationBehaviorName" value="PROPAGATION_REQUIRED" />
+    </bean>
 
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="routeDataSource" />
-	</bean>
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="routeDataSource" />
+    </bean>
 
-	<bean id="routeSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:mybatis-configuration.xml" />
-		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml" /> 
-		<property name="dataSource" ref="routeDataSource" />
-		<property name="typeAliasesPackage" value="com.jeesuite.demo.dao.entity" />
-		<property name="plugins">
-			<array>
-				<bean class="com.jeesuite.mybatis.plugin.JeesuiteMybatisInterceptor">
-					<property name="mapperLocations" value="classpath:mapper/*Mapper.xml" />
-					<!--
-				      可选值：cache(自动缓存),rwRoute(读写分离),dbShard(分库路由,page:自动分页)
-				    -->
-					<property name="interceptorHandlers" value="cache,rwRoute,page" />
-					<property name="properties">
-						<props>
-						    <!--可选值:default(默认),mapper3(集成mapper框架)-->
-							<prop key="crudDriver">mapper3</prop>
-							<prop key="dbType">Mysql</prop>
-						</props>
-					</property>
-				</bean>
-			</array>
-		</property>
-	</bean>
-	<!--集成Mapper框架的配置,此处修改为tk.mybatis.spring.mapper.MapperScannerConfigurer-->
-	<bean class="com.jeesuite.mybatis.spring.MapperScannerConfigurer">
+    <bean id="routeSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-configuration.xml" />
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml" /> 
+        <property name="dataSource" ref="routeDataSource" />
+        <property name="typeAliasesPackage" value="com.jeesuite.demo.dao.entity" />
+        <property name="plugins">
+            <array>
+                <bean class="com.jeesuite.mybatis.plugin.JeesuiteMybatisInterceptor">
+                    <property name="mapperLocations" value="classpath:mapper/*Mapper.xml" />
+                    <!--
+                      可选值：cache(自动缓存),rwRoute(读写分离),dbShard(分库路由,page:自动分页)
+                    -->
+                    <property name="interceptorHandlers" value="cache,rwRoute,page" />
+                    <property name="properties">
+                        <props>
+                            <!--可选值:default(默认),mapper3(集成mapper框架)-->
+                            <prop key="crudDriver">mapper3</prop>
+                            <prop key="dbType">Mysql</prop>
+                            <!--查询未命中是否缓存标记，避免缓存穿透-->
+                            <prop key="cache.nullValue">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+    <!--集成Mapper框架的配置,此处修改为tk.mybatis.spring.mapper.MapperScannerConfigurer-->
+    <bean class="com.jeesuite.mybatis.spring.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="routeSqlSessionFactory" />
-		<property name="basePackage" value="com.jeesuite.demo.dao.mapper" />
+        <property name="basePackage" value="com.jeesuite.demo.dao.mapper" />
     </bean>
 ```
+
 默认使用jeesuite-cache模块作为自动缓存支持，如果你需要使用`spring-data-redis`或者自定义，可以按如下配置
+
 ```
 <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-	<property name="connectionFactory" ref="jedisConnectionFactory" />
+    <property name="connectionFactory" ref="jedisConnectionFactory" />
     ....
 </bean>
 
@@ -180,63 +191,72 @@ group1.slave1.db.password=123456
 
 <!-- 使用spring-data-redis作为mybatis自动缓存提供者 -->
 <bean class="com.jeesuite.mybatis.plugin.cache.provider.SpringRedisProvider">
-	<property name="redisTemplate"  ref="redisTemplate"/>
-	<property name="stringRedisTemplate" ref="stringRedisTemplate" />
+    <property name="redisTemplate"  ref="redisTemplate"/>
+    <property name="stringRedisTemplate" ref="stringRedisTemplate" />
 </bean>
 ```
+
 另外需要在自己项目加入spring-data-redis依赖
 
 #### 如何使用自动缓存
-只需要在mapper接口增加@com.jeesuite.mybatis.plugin.cache.annotation.Cache标注
+
+只需要在mapper接口增加**@com.jeesuite.mybatis.plugin.cache.annotation.Cache**标注
+
 ```
 public interface UserEntityMapper extends BaseMapper<UserEntity> {
-	
-	@Cache
-	public UserEntity findByMobile(@Param("mobile") String mobile);
-	
-	@Cache
-	List<String> findByType(@Param("type") int type);
+
+    @Cache
+    public UserEntity findByMobile(@Param("mobile") String mobile);
+
+    @Cache
+    List<String> findByType(@Param("type") int type);
 }
 ```
+
 配置完成即可，查询会自动缓存、更新会自动更新。
 
-
 #### 一些其他说明
+
 ##### 开启了自动缓存数据库事务失败写入缓存如何处理？
-- 在事务失败后调用CacheHandler.rollbackCache(),通常在业务的拦截器统一处理
-##### 自动缓存的实体如何更新？
-- 首先查询出实体对象，UserEntity entity = mapper.get...(id);
-- 然后通过mapper.updateSelective(entity);
+
+* 在事务失败后调用**CacheHandler.rollbackCache\(\),**通常在业务的拦截器统一处理
+  ##### 自动缓存的实体如何更新？
+* 首先查询出实体对象，UserEntity entity = mapper.get...\(id\);
+* 然后通过mapper.updateSelective\(entity\);
 
 如果不全量更新会导致缓存的内容是有部分字段，因为update后会那最新的entity更新缓存。
+
 ##### 如果手动更新或写入实体缓存？
+
 提供EntityCacheHelper方法，在代码中手动写入缓存也将纳入自动缓存管理，无需担心缓存更新问题。
 
 ```
 /**
-	 * 查询并缓存结果
-	 * @param entityClass 实体类class (用户组装实际的缓存key)
-	 * @param key 缓存的key（和entityClass一起组成真实的缓存key。<br>如entityClass=UserEntity.class,key=findlist，实际的key为：UserEntity.findlist）
-	 * @param expireSeconds 过期时间，单位：秒
-	 * @param dataCaller 缓存不存在数据加载源
-	 * @return
-	 */
-	public static <T> T queryTryCache(Class<? extends BaseEntity> entityClass,String key,long expireSeconds,Callable<T> dataCaller)
+     * 查询并缓存结果
+     * @param entityClass 实体类class (用户组装实际的缓存key)
+     * @param key 缓存的key（和entityClass一起组成真实的缓存key。<br>如entityClass=UserEntity.class,key=findlist，实际的key为：UserEntity.findlist）
+     * @param expireSeconds 过期时间，单位：秒
+     * @param dataCaller 缓存不存在数据加载源
+     * @return
+     */
+    public static <T> T queryTryCache(Class<? extends BaseEntity> entityClass,String key,long expireSeconds,Callable<T> dataCaller)
 ```
 
 ```
 //生成的缓存key为：UserEntity.findByStatus:2
 EntityCacheHelper.queryTryCache(UserEntity.class, "findByStatus:2", new Callable<List<UserEntity>>() {
-	public List<UserEntity> call() throws Exception {
-	  //查询语句
-	  List<UserEntity> entitys = mapper.findByStatus((short)2);
-	  return entitys;
+    public List<UserEntity> call() throws Exception {
+      //查询语句
+      List<UserEntity> entitys = mapper.findByStatus((short)2);
+      return entitys;
    }
 });
 ```
 
 #### 如何使用分页
-##### 1.标注方式(`@Pageable`)
+
+##### 1.标注方式\(`@Pageable`\)
+
 ```
 //mapper接口
 @Pageable
@@ -245,7 +265,9 @@ List<UserEntity> findByStatus(short status);
 //调用
 Page<UserEntity> pageInfo = mapper.pageQuery(new PageParams(1,5));
 ```
+
 ##### 2.page方法定义方式
+
 ```
 //mapper接口
 @Select("SELECT * FROM users where 1=1")
@@ -253,10 +275,10 @@ Page<UserEntity> pageQuery(@Param("pageParam") PageParams pageParam);
 
 //调用
 Page<UserEntity> pageInfo = PageExecutor.pagination(new PageParams(1,10), new PageDataLoader<UserEntity>() {
-	@Override
-	public List<UserEntity> load() {
-	   return mapper.findByStatus((short)1);
-	}
+    @Override
+    public List<UserEntity> load() {
+       return mapper.findByStatus((short)1);
+    }
 });
 ```
 
