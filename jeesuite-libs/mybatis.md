@@ -202,7 +202,7 @@ group1.slave1.db.password=123456
 
 只需要在mapper接口增加**@com.jeesuite.mybatis.plugin.cache.annotation.Cache**标注
 
-```
+```java
 public interface UserEntityMapper extends BaseMapper<UserEntity> {
 
     @Cache
@@ -230,7 +230,7 @@ public interface UserEntityMapper extends BaseMapper<UserEntity> {
 
 提供EntityCacheHelper方法，在代码中手动写入缓存也将纳入自动缓存管理，无需担心缓存更新问题。
 
-```
+```java
 /**
      * 查询并缓存结果
      * @param entityClass 实体类class (用户组装实际的缓存key)
@@ -242,7 +242,7 @@ public interface UserEntityMapper extends BaseMapper<UserEntity> {
     public static <T> T queryTryCache(Class<? extends BaseEntity> entityClass,String key,long expireSeconds,Callable<T> dataCaller)
 ```
 
-```
+```java
 //生成的缓存key为：UserEntity.findByStatus:2
 EntityCacheHelper.queryTryCache(UserEntity.class, "findByStatus:2", new Callable<List<UserEntity>>() {
     public List<UserEntity> call() throws Exception {
@@ -257,7 +257,7 @@ EntityCacheHelper.queryTryCache(UserEntity.class, "findByStatus:2", new Callable
 
 ##### 1.标注方式\(`@Pageable`\)
 
-```
+```java
 //mapper接口
 @Pageable
 List<UserEntity> findByStatus(short status);
@@ -268,7 +268,7 @@ Page<UserEntity> pageInfo = mapper.pageQuery(new PageParams(1,5));
 
 ##### 2.page方法定义方式
 
-```
+```java
 //mapper接口
 @Select("SELECT * FROM users where 1=1")
 Page<UserEntity> pageQuery(@Param("pageParam") PageParams pageParam);
