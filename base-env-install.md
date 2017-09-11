@@ -134,7 +134,27 @@ cp kafka_2.11-0.11.0.0
 # 修改配置
 vi config/server.properties
 ```
-
+关键配置
+```
+broker.id=1
+#advertised.host.name=192.168.1.94
+#listeners=PLAINTEXT://192.168.1.94:9092
+port=9092
+num.network.threads=3
+num.io.threads=3
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+log.dirs=/datas/kafka-logs
+num.partitions=3
+num.recovery.threads.per.data.dir=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+auto.create.topics.enable=true
+zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=6000
+```
 启动
 
 ```
