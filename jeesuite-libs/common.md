@@ -1,6 +1,6 @@
 ### 功能说明
 
-cache模块实现了
+common模块提供基础工具类，与common-lang3互补。
 
 ### 使用说明
 
@@ -9,7 +9,7 @@ cache模块实现了
 ```
 <dependency>
     <groupId>com.jeesuite</groupId>
-    <artifactId>jeesuite-cache</artifactId>
+    <artifactId>jeesuite-common</artifactId>
     <version>[最新版本]</version>
 </dependency>
 ```
@@ -49,6 +49,7 @@ cache模块实现了
 * BeanCopyUtils：bean之间值复制工具类，比BeanUtils效率高
 
 * DateUtils：常用日期函数，与common-lang包日期函数互补
+
 * FormatValidateUtils：常用格式校验工具
 * HashUtils：MurMurHash算法实现的hash算法
 * JDBCUtils：jdbc工具
