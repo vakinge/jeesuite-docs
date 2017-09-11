@@ -104,8 +104,8 @@ dir /datas/redis/
 
 requirepass 123456
 ```
+启动
 
-### 
 
 ### 安装zookeeper
 
