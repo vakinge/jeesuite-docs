@@ -75,13 +75,12 @@ make
 cd src
 make install PREFIX=/usr/local/redis
 cp ../redis.conf /etc/redis.conf
-
 ```
 
 参考配置
 
 ```
-daemonize no
+daemonize yes
 #protected-mode no
 pidfile /var/run/redis/redis.pid
 
@@ -104,12 +103,21 @@ dir /datas/redis/
 
 requirepass 123456
 ```
+
 启动
 
+```
+/usr/local/redis/bin/redis-server /etc/redis.conf
+```
 
 ### 安装zookeeper
 
-
+```
+wget http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz
+tar -xzvf zookeeper-3.4.10.tar.gz
+cp zookeeper-3.4.10
+mv conf/zoo_sample.cfg conf/zookeeper.properties
+```
 
 ### 安装kafka
 
