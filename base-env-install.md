@@ -1,4 +1,6 @@
-## 环境：centos6.5
+## 环境：centos6.5 64位
+
+由于yum直接安装版本版本会比较低，所以采用手动安装的方式。
 
 ### 安装JDK
 
@@ -46,7 +48,7 @@ service mysqld start
 
 初始化root密码
 
-```bash
+```ruby
 #获取安装的临时密码
 grep 'temporary password' /var/log/mysqld.log
 #登录mysql
@@ -66,8 +68,50 @@ init_connect='SET NAMES utf8'
 ### 安装redis
 
 ```
---
+wget http://download.redis.io/releases/redis-3.2.10.tar.gz
+tar -xzvf redis-3.2.10.tar.gz
+cd redis-3.2.10
+make
+cd src
+make install PREFIX=/usr/local/redis
+cp ../redis.conf /etc/redis.conf
+
 ```
+
+参考配置
+
+```
+daemonize no
+#protected-mode no
+pidfile /var/run/redis/redis.pid
+
+port 6379
+#bind 120.0.0.1
+timeout 0
+loglevel warning
+
+logfile /datas/logs/redis/redis.log
+databases 16
+
+
+save 900 1
+save 300 10
+save 60 10000
+
+rdbcompression yes
+dbfilename dump.rdb
+dir /datas/redis/
+
+requirepass 123456
+```
+
+### 
+
+### 安装zookeeper
+
+
+
+### 安装kafka
 
 
 
