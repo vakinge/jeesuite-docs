@@ -40,18 +40,12 @@ common模块提供基础工具类，依赖common-lang3。
          }
   ```
 
-* JSON:JsonUtils
-
-* 序列化：FSTSerializer，JavaSerializer，KryoSerializer，KryoPoolSerializer
-
-* 包扫描：PackageScanner
-
+* JsonUtils:Json字符串与对象转化，基于jackson封装。
+* 序列化工具：FSTSerializer，JavaSerializer，KryoSerializer，KryoPoolSerializer
+* PackageScanner：包扫描
 * BeanCopyUtils：bean之间值复制工具类，比BeanUtils效率高
-
 * DateUtils：常用日期函数，与common-lang包日期函数互补
-
 * FormatValidateUtils：常用格式校验工具
-
 * HashUtils：MurMurHash算法实现的hash算法
 * JDBCUtils：jdbc工具
 * ReflectUtils：反射工具
