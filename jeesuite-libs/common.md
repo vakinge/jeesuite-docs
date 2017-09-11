@@ -1,4 +1,18 @@
-**common模块提供常用工具类。**
+### 功能说明
+
+cache模块实现了
+
+### 使用说明
+
+#### 添加依赖
+
+```
+<dependency>
+    <groupId>com.jeesuite</groupId>
+    <artifactId>jeesuite-cache</artifactId>
+    <version>[最新版本]</version>
+</dependency>
+```
 
 * 加密类：AES,DES,RSA,Base64，SHA1，SimpleCryptUtils\(可逆加密\)，DigestUtils\(MD5、MD5短码\)
 * HttpUtils:基于HttpURLConnection实现的http操作工具类，无第三方依赖，适用简单无性能要求场景。

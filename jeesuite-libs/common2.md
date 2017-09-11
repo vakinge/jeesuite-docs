@@ -1,4 +1,18 @@
+### 功能说明
+
 common2也是工具类，较common模块重量级一些，需要依赖第三方环境如：redis、zookeeper等，故与common分开。目前实现了：全局ID生成器、分布式锁\(redis版、zookeeper版\)、excel工具。
+
+### 使用说明
+
+#### 添加依赖
+
+```
+<dependency>
+    <groupId>com.jeesuite</groupId>
+    <artifactId>jeesuite-common2</artifactId>
+    <version>[最新版本]</version>
+</dependency>
+```
 
 ### 全局Id生成器
 
