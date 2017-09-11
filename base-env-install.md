@@ -118,22 +118,28 @@ tar -xzvf zookeeper-3.4.10.tar.gz
 cp zookeeper-3.4.10
 mv conf/zoo_sample.cfg conf/zookeeper.properties
 ```
+
 启动
 
 ```
 ./bin/zkServer.sh conf/zookeeper.properties &
 ```
+
 ### 安装kafka
+
 ```
-wget http://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz
-tar -xzvf zookeeper-3.4.10.tar.gz
-cp zookeeper-3.4.10
-mv conf/zoo_sample.cfg conf/zookeeper.properties
+wget https://www.apache.org/dyn/closer.cgi?path=/kafka/0.11.0.0/kafka_2.11-0.11.0.0.tgz
+tar -xzvf kafka_2.11-0.11.0.0.tgz
+cp kafka_2.11-0.11.0.0
+# 修改配置
+vi config/server.properties
 ```
+
 启动
 
 ```
-./bin/zkServer.sh conf/zookeeper.properties &
+./bin/kafka-server-start.sh ./config/server.properties 1>/dev/null 2>&1 &
 ```
+
 
 
