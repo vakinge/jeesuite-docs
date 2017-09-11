@@ -77,7 +77,6 @@ DefaultMessage msg = new DefaultMessage("hello,man")
                     .header("headerkey1", "headerval1")//写入header信息
                     .header("headerkey1", "headerval1")//写入header信息
                     .partitionFactor(1000); //分区因子，譬如userId＝1000的将发送到同一分区、从而发送到消费者的同一节点(有状态)
-                    
 ```
 
 #### 开发一个consumer
@@ -92,6 +91,10 @@ DefaultMessage msg = new DefaultMessage("hello,man")
         <property name="useNewAPI" value="false" />
         <!-- 默认最大处理线程，可以配置大一下空闲会自动回收 -->
         <property name="processThreads" value="100" />
+        <!--自定义offset记录器（可选）-->
+        <property name="offsetLogHanlder">
+           <bean class="com.jeesuite.test.MysqlOffsetLogHanlder" />
+        </property>
         <property name="configs">
             <!--参考 http://kafka.apache.org/documentation.html#newconsumerconfigs -->
             <props>
