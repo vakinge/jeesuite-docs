@@ -1,14 +1,14 @@
 ### 功能说明
 
-- 基于spring封装简化配置和调用方式
-- 基于配置新旧两版Consumer API兼容支持
-- 支持二阶段处理，即：fetch线程同步处理和process线程异步处理
-- 消费成功业务处理失败自动重试或自定义重试支持
-- process线程池采用`LinkedTransferQueue`，支持线程回收和队列大小限制，确保系统崩溃等不会有数据丢失。
-- 支持特殊场景发送有状态的消息（如：同一个用户的消息全部由某一个消费节点处理）
-- producer、consumer端监控数据采集，由（[jeesuite-admin](http://git.oschina.net/vakinge/jeesuite-admin)）输出
-- 支持producer延迟重试
-- 支持offset持久化，应用启动自动恢复指定的offset
+* 基于spring封装简化配置和调用方式
+* 基于配置新旧两版Consumer API兼容支持
+* 支持二阶段处理，即：fetch线程同步处理和process线程异步处理
+* 消费成功业务处理失败自动重试或自定义重试支持
+* process线程池采用`LinkedTransferQueue`，支持线程回收和队列大小限制，确保系统崩溃等不会有数据丢失。
+* 支持特殊场景发送有状态的消息（如：同一个用户的消息全部由某一个消费节点处理）
+* producer、consumer端监控数据采集，由（[jeesuite-admin](http://git.oschina.net/vakinge/jeesuite-admin)）输出
+* 支持producer延迟重试
+* 支持offset持久化，应用启动自动恢复指定的offset
 
 ### 使用说明
 
@@ -21,8 +21,11 @@
     <version>[最新版本]</version>
 </dependency>
 ```
+
 #### 开发一个producer
+
 ###### 首先在spring注册，添加以下配置文件即可
+
 ```
     <bean id="topicProducerProvider" class="com.jeesuite.kafka.spring.TopicProducerSpringProvider">
         <!-- 默认是否异步发送 -->
@@ -52,29 +55,35 @@
 ```
 
 ###### 发送一条消息
-```
+
+```java
 @Autowired
 private TopicProducerSpringProvider topicProducer;
-	
+
 public void testPublish() {
-    //默认模式（异步/ 同步）发送
+    //默认模式（异步/ 同步）发送
     topicProducer.publish("demo-topic", new DefaultMessage("hello,man"));
-	//异步发送
-	topicProducer.publish("demo-topic", new DefaultMessage("hello,man"),true);
-	//发送未包装的消息体（兼容异构的consumer端）
-	topicProducer.publishNoWrapperMessage("demo-topic", JsonUtils.toJson(user),true);
+    //异步发送
+    topicProducer.publish("demo-topic", new DefaultMessage("hello,man"),true);
+    //发送未包装的消息体（兼容异构的consumer端）
+    topicProducer.publishNoWrapperMessage("demo-topic", JsonUtils.toJson(user),true);
 }
 ```
+
 ###### 关于DefaultMessage
-```
+
+```java
 DefaultMessage msg = new DefaultMessage("hello,man")
-		            .header("headerkey1", "headerval1")//写入header信息
-		            .header("headerkey1", "headerval1")//写入header信息
-		            .partitionFactor(1000) //分区因子，譬如userId＝1000的将发送到同一分区、从而发送到消费者的同一节点(有状态)
-		            .consumerAck(true);// 已消费回执(未发布)
+                    .header("headerkey1", "headerval1")//写入header信息
+                    .header("headerkey1", "headerval1")//写入header信息
+                    .partitionFactor(1000); //分区因子，譬如userId＝1000的将发送到同一分区、从而发送到消费者的同一节点(有状态)
+                    
 ```
+
 #### 开发一个consumer
+
 ###### 首先在spring注册，添加以下配置文件即可
+
 ```
 <bean  id="topicConsumerProvider" class="com.jeesuite.kafka.spring.TopicConsumerSpringProvider">
         <!-- 如果为false启动时将阻塞主线程，如zk连接超时就报错 -->
@@ -111,33 +120,40 @@ DefaultMessage msg = new DefaultMessage("hello,man")
         </property>
     </bean>
 ```
+
 ###### 编写一个对应的消息处理器
-```
+
+```java
 public class DemoMessageHandler implements MessageHandler {
 
-	@Override
-	public void p1Process(DefaultMessage message) {
-		//第一阶段处理是同步处理，即在fetch线程处理
-	}
+    @Override
+    public void p1Process(DefaultMessage message) {
+        //第一阶段处理是同步处理，即在fetch线程处理
+    }
 
-	@Override
-	public void p2Process(DefaultMessage message) {
-		//第二阶段处理是异步处理，在处理线程池排队处理
-		Serializable body = message.getBody();
-		System.out.println("DemoMessageHandler process message:" + body);
-		try {Thread.sleep(100);} catch (Exception e) {}
-	}
+    @Override
+    public void p2Process(DefaultMessage message) {
+        //第二阶段处理是异步处理，在处理线程池排队处理
+        Serializable body = message.getBody();
+        System.out.println("DemoMessageHandler process message:" + body);
+        try {Thread.sleep(100);} catch (Exception e) {}
+    }
 
 
-	@Override
-	public boolean onProcessError(DefaultMessage message) {
-		System.out.println("ignore error message : "+message);
-		return true;
-	}
+    @Override
+    public boolean onProcessError(DefaultMessage message) {
+        System.out.println("ignore error message : "+message);
+        return true;
+    }
 
 }
 ```
+
 MessageHandler的一些说明
-- 两阶段处理的同一份数据、一般情况第二阶段处理即可。
-- 如果要触发重试机制请不要try catch异常
-- onProcessError 返回true表示业务自身处理错误，否则框架会每30秒重新执行一次，最多重试3次
+
+* 两阶段处理的同一份数据、一般情况第二阶段处理即可。
+* 如果要触发重试机制请不要try catch异常
+* onProcessError 返回true表示业务自身处理错误，否则框架会每30秒重新执行一次，最多重试3次
+
+
+
