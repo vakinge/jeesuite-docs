@@ -15,6 +15,9 @@ Jeesuite 是一个java后台分布式架构开发套件。涵盖缓存、消息�
 * 高度灵活、每个模块可以独立使用。
 
 ### 项目
-
-[http://git.oschina.net/vakinge/jeesuite-libs](http://git.oschina.net/vakinge/jeesuite-libs)
-
+ - 基础库
+  - [http://git.oschina.net/vakinge/jeesuite-libs](http://git.oschina.net/vakinge/jeesuite-libs)
+  - [https://github.com/vakinge/jeesuite-libs](https://github.com/vakinge/jeesuite-libs)
+ - 配置中心
+  - [http://git.oschina.net/vakinge/jeesuite-config](http://git.oschina.net/vakinge/jeesuite-config)
+  - [https://github.com/vakinge/jeesuite-config](https://github.com/vakinge/jeesuite-config)
