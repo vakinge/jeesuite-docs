@@ -2,7 +2,7 @@
 
 由于yum直接安装版本版本会比较低，所以采用手动安装的方式。
 
-### 安装JDK
+### 安装JDK {#jdk}
 
 ```
 1.下载jdk rpm包
@@ -18,7 +18,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 source /etc/profile
 ```
 
-### 安装mysql5.7
+### 安装mysql5.7 {#mysql}
 
 ```
 # 下载mysql源安装包
@@ -134,7 +134,9 @@ cp kafka_2.11-0.11.0.0
 # 修改配置
 vi config/server.properties
 ```
+
 关键配置
+
 ```
 broker.id=1
 #advertised.host.name=192.168.1.94
@@ -155,6 +157,7 @@ auto.create.topics.enable=true
 zookeeper.connect=localhost:2181
 zookeeper.connection.timeout.ms=6000
 ```
+
 启动
 
 ```
