@@ -60,6 +60,7 @@ cc.sync.zkServers=127.0.0.1:2181
 ```
 
 ### 部署
+拷贝jeesuite-config-server.jar 与 application.properties在同一目录
 
 ```
 nohup java -jar jeesuite-config-server.jar > demo.out 2>&1 &
