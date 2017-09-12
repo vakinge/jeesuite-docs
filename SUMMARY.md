@@ -21,6 +21,5 @@
   * [ELK日志平台](logmonitor/ELK.md)
   * [scheduler监控](logmonitor/scheduler.md)
   * [kafka监控](logmonitor/kafka.md)
-  * [APM](logmonitor/APM.md)
 * [附：基础环境搭建](base-env-install.md)
 
