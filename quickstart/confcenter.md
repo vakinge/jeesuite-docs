@@ -12,6 +12,9 @@ mvn clean package -DskipTests=true
 
 **最终生成部署包为：**jeesuite-config-server/target/jeesuite-config-server.jar
 
+### 创建数据库表
+导入db.sql
+
 ### 修改配置
 
 可以在编译前直接修改\`jeesuite-config/jeesuite-config-server/src/main/resources/application.properties\`文件，也可以加载外部配置文件，推荐外部加载配置文件。
