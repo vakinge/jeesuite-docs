@@ -10,6 +10,8 @@ git clone https://git.oschina.net/vakinge/jeesuite-config.git
 mvn clean package -DskipTests=true
 ```
 
+### 
+
 ### 修改配置
 
 可以在编译前直接修改\`jeesuite-config/jeesuite-config-server/src/main/resources/application.properties\`文件，也可以加载外部配置文件，推荐外部加载配置文件。
