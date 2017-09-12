@@ -66,11 +66,11 @@ cc.sync.zkServers=127.0.0.1:2181
 
 ### 部署
 
-拷贝jeesuite-config-server.jar 与 _application.properties_在同一目录，springboot会优先加载同一目录下名为_application.properties的配置文件。_
+拷贝**jeesuite-config-server.jar** 与 _**application.properties**_在同一目录，springboot会优先加载同一目录下名为_application.properties的配置文件。_
 
 ```
 nohup java -jar jeesuite-config-server.jar > config-server.out 2>&1 &
 ```
 
-启动成功,打开http://127.0.0.1:7777/index ，初始账号密码：admin /admin123
+启动成功,打开[http://127.0.0.1:7777/index](http://127.0.0.1:7777/index) ，初始账号密码：admin /admin123
 
