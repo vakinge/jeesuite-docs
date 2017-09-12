@@ -25,6 +25,7 @@ server.port=7777
 mybatis.type-aliases-package=com.jeesuite.admin.dao.entity
 mybatis.mapper-locations=classpath:mapper/*Mapper.xml
 
+#以下配置，根据需要修改
 #数据库配置
 db.group.size=1
 db.shard.size=1000
@@ -37,7 +38,7 @@ db.timeBetweenEvictionRunsMillis=60000
 db.minEvictableIdleTimeMillis=300000
 db.testOnBorrow=false
 db.testOnReturn=false
-master.db.url=jdbc:mysql://192.168.1.94:3306/jeesuite_config?useUnicode=true&amp;characterEncoding=UTF-8
+master.db.url=jdbc:mysql://127.0.0.1:3306/jeesuite_config?useUnicode=true&amp;characterEncoding=UTF-8
 master.db.username=root
 master.db.password=root
 master.db.initialSize=2
@@ -60,10 +61,11 @@ cc.sync.zkServers=127.0.0.1:2181
 ```
 
 ### 部署
-拷贝jeesuite-config-server.jar 与 application.properties在同一目录
+
+拷贝jeesuite-config-server.jar 与 _application.properties_在同一目录，springboot会优先加载同一目录下名为_application.properties的配置文件。_
 
 ```
-nohup java -jar jeesuite-config-server.jar > demo.out 2>&1 &
+nohup java -jar jeesuite-config-server.jar > config-server.out 2>&1 &
 ```
 
 
