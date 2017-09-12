@@ -13,6 +13,7 @@ mvn clean package -DskipTests=true
 **最终生成部署包为：**jeesuite-config-server/target/jeesuite-config-server.jar
 
 ### 创建数据库表
+
 导入db.sql
 
 ### 修改配置
@@ -71,5 +72,5 @@ cc.sync.zkServers=127.0.0.1:2181
 nohup java -jar jeesuite-config-server.jar > config-server.out 2>&1 &
 ```
 
-
+启动成功,打开http://127.0.0.1:7777/index ，初始账号密码：admin /admin123
 
