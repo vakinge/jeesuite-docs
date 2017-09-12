@@ -9,7 +9,8 @@ git clone https://git.oschina.net/vakinge/jeesuite-config.git
 ```
 mvn clean package -DskipTests=true
 ```
-最终生成部署包为：
+
+**最终生成部署包为：**jeesuite-config-server/target/jeesuite-config-server.jar
 
 ### 修改配置
 
@@ -56,6 +57,12 @@ cc.encrypt.keyStore.password=123456
 cc.encrypt.keyStore.type=JCEKS
 #如果需要通过zookeeper通知配置更新，则需要配置
 cc.sync.zkServers=127.0.0.1:2181
+```
+
+### 部署
+
+```
+nohup java -jar jeesuite-config-server.jar > demo.out 2>&1 &
 ```
 
 
