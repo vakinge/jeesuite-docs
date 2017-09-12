@@ -2,7 +2,6 @@
 
 * [概要](README.md)
   * [总体架构](architecture.md)
-  * [项目体系](projects.md)
 * [快速开始](quick-start.md)
   * [模板项目](quickstart/demo-project.md)
   * [配置中心](quickstart/confcenter.md)
