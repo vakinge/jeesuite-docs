@@ -9,8 +9,7 @@ git clone https://git.oschina.net/vakinge/jeesuite-config.git
 ```
 mvn clean package -DskipTests=true
 ```
-
-### 
+最终生成部署包为：
 
 ### 修改配置
 
