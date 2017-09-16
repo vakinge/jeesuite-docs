@@ -2,7 +2,8 @@
 
 | 应用&模块 | 核心技术&框架 |
 | :--- | :--- |
-| API网关 | zuul |
+| API网关 | zuul，Ribbon，Hystrix |
+| 服务发现 | eureka |
 
 
 
