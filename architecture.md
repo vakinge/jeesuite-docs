@@ -1,2 +1,4 @@
-jeesuite是一个java分布式应用开发套件。
+### 总体架构![](http://ojmezn0eq.bkt.clouddn.com/jeesuite_arch.png)
+
+
 
