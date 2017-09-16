@@ -166,3 +166,13 @@ zookeeper.connection.timeout.ms=6000
 
 
 
+### window安装参考：
+
+redis安装 ：[http://www.cnblogs.com/lpyan/p/5608333.html](http://www.cnblogs.com/lpyan/p/5608333.html)
+
+kafka安装：[http://blog.csdn.net/evankaka/article/details/52421314](http://blog.csdn.net/evankaka/article/details/52421314)
+
+zookeeper安装：[http://blog.csdn.net/tlk20071/article/details/52028945](http://blog.csdn.net/tlk20071/article/details/52028945)
+
+
+
