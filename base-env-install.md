@@ -1,4 +1,4 @@
-## 环境：centos6.5 64位
+## 环境：centos6.5 64位 
 
 由于yum直接安装版本版本会比较低，所以采用手动安装的方式。
 
@@ -164,8 +164,6 @@ zookeeper.connection.timeout.ms=6000
 ./bin/kafka-server-start.sh ./config/server.properties 1>/dev/null 2>&1 &
 ```
 
-
-
 ### window安装参考：
 
 redis安装 ：[http://www.cnblogs.com/lpyan/p/5608333.html](http://www.cnblogs.com/lpyan/p/5608333.html)
@@ -173,6 +171,4 @@ redis安装 ：[http://www.cnblogs.com/lpyan/p/5608333.html](http://www.cnblogs.
 kafka安装：[http://blog.csdn.net/evankaka/article/details/52421314](http://blog.csdn.net/evankaka/article/details/52421314)
 
 zookeeper安装：[http://blog.csdn.net/tlk20071/article/details/52028945](http://blog.csdn.net/tlk20071/article/details/52028945)
-
-
 
