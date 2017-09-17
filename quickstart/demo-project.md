@@ -26,7 +26,7 @@ mvn clean package -DskipTests=true
 
   > redis：端口:6379，密码：123456
   >
-  > mysql：database:bestpl\_db ，用户名：root，密码：123456
+  > mysql：database:bestpl\_db ，用户名：root，密码：123456 ，脚本：doc/table.sql
   >
   > kafka：端口：9092
   >
@@ -58,9 +58,10 @@ mvn clean package -DskipTests=true
 
 ![image](http://ojmezn0eq.bkt.clouddn.com/bestpl_snapshot.png)
 
-
 ---
+
 ### 基于docker发布
+
 ```
 #切换到项目目录
 cd /你的项目目录/jeesuite-bestpl
@@ -68,11 +69,15 @@ cd /你的项目目录/jeesuite-bestpl
 mvn clean install -DskipTests=true -Pdocker
 #启动
 docker-compose up -d
-
 ```
+
 ---
+
 ### eclipse调试运行
-  1. **dubbo**：运行`AppServer.java`
-  2. **rest**:通过`mvn jetty:run`运行
-  3. **springboot**：运行`Application.java` 
-  
+
+1. **dubbo**：运行`AppServer.java`
+2. **rest**:通过`mvn jetty:run`运行
+3. **springboot**：运行`Application.java` 
+
+
+
