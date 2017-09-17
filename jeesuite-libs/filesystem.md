@@ -70,26 +70,52 @@ public void test() {
 配置文件
 
 ```
-fs.groupNames=test,fastdfstest
-# 服务提供者可选值（fastDFS，qiniu，aliyun）
-fs.test.provider=qiniu
-fs.test.accessKey=iqq3aa-ncqfdGGubCcS-N8EUV-qale2ezndnrtKS
-fs.test.secretKey=1RmdaMVjrjXkyRVPOmyMa6BzcdG5VDdF-SH_HUTe
-fs.test.urlprefix=http://7xq7jj.com1.z0.glb.clouddn.com
-fs.test.private=true
-# fastdfstest 配置
-fs.fastdfstest.provider=fastDFS
-fs.fastdfstest.servers=192.168.1.101:22122,192.168.1.102:22122
-fs.fastdfstest.connectTimeout=3000
-fs.fastdfstest.maxThreads=100
+#指定全局组id （默认为：public & private）
+public.filesystem.id=public
+private.filesystem.id=private
+
+#全局公共空间
+public.filesystem.provider=qiniu
+public.filesystem.bucketName=test112233
+public.filesystem.urlprefix=http://owep828p6.bkt.clouddn.com
+public.filesystem.accessKey=iqq3aa-ncqfdGGubCcS-N8EUV-qale2ezndnrtKS
+public.filesystem.secretKey=1RmdaMVjrjXkyRVPOmyMa6BzcdG5VDdF-SH_HUTe
+public.filesystem.private=false
+
+#全局私有空间
+private.filesystem.provider=qiniu
+private.filesystem.bucketName=testa1b2c3
+private.filesystem.urlprefix=http://ovjjqjpmp.bkt.clouddn.com
+private.filesystem.accessKey=iqq3aa-ncqfdGGubCcS-N8EUV-qale2ezndnrtKS
+private.filesystem.secretKey=1RmdaMVjrjXkyRVPOmyMa6BzcdG5VDdF-SH_HUTe
+private.filesystem.private=true
+
+#自定义空间
+report.filesystem.provider=qiniu
+report.filesystem.bucketName=report123
+report.filesystem.urlprefix=http://rtjjqrrpmp.bkt.clouddn.com
+report.filesystem.accessKey=iqq3aa-ncqfdGGubCcS-N8EUV-qale2ezndnrtKS
+report.filesystem.secretKey=1RmdaMVjrjXkyRVPOmyMa6BzcdG5VDdF-SH_HUTe
+report.filesystem.private=true
+
 ```
 
 使用
 
 ```java
-FSProvider provider = FSClientFactory.build("qiniu", "test");
-String url = provider.upload(new UploadObject(new File("/Users/jiangwei/Desktop/homepage.txt")));
-System.out.println(provider.getDownloadUrl(url));
+public void test() {
+   //上传到全局公有
+   String url = FileSystemClient.getPublicClient().upload(new File("/Users/jiangwei/readme.txt"));
+   System.out.println(url);
+		
+   //上传到全局私有空间
+   url = FileSystemClient.getPrivateClient().upload("readme2.txt", new File("/Users/jiangwei/readme.txt"));
+   //生成私有下载链接
+   String downloadUrl = FileSystemClient.getPrivateClient().getDownloadUrl(url);
+		
+   //上传到自定义空间
+   url = FileSystemClient.getClient("report").upload(new File("/Users/jiangwei/report.xls"));
+}
 ```
 
 
