@@ -22,7 +22,14 @@ mvn clean package -DskipTests=true
 
 * 步骤一：分别将以上构建的部署包拷贝到部署目录，如：/datas/deploy目录下。
 * 步骤二：部署dubbo服务
-  ![](/assets/duubo-deploy-1.png)
+  ![](http://ojmezn0eq.bkt.clouddn.com/duubo-deploy-1.png)启动成功，如下：
+
+```
+2017-09-17 11:22:13.752 INFO [main][AppServer.java:31] - 启动app-server....
+==============================
+|---------服务启动成功----------|
+==============================
+```
 
 
 
