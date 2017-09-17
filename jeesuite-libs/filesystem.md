@@ -98,6 +98,19 @@ report.filesystem.accessKey=iqq3aa-ncqfdGGubCcS-N8EUV-qale2ezndnrtKS
 report.filesystem.secretKey=1RmdaMVjrjXkyRVPOmyMa6BzcdG5VDdF-SH_HUTe
 report.filesystem.private=true
 
+# 使用fastdfs
+xxxx1.filesystem.provider=fastDFS
+xxxx1.filesystem.servers=120.24.185.19:22122
+xxxx1.filesystem.urlprefix=http://120.24.185.19:81
+xxxx1.filesystem.connectTimeout=3000
+xxxx1.filesystem.maxThreads=100
+
+#使用阿里云
+xxxx2.filesystem.provider=aliyun
+xxxx2.filesystem.bucketName=aaabb
+xxxx2.filesystem.endpoint=http://guangzhou.aliyun.com
+xxxx2.filesystem.accessKey=111111
+xxxx2.filesystem.secretKey=22222
 ```
 
 使用
@@ -107,12 +120,12 @@ public void test() {
    //上传到全局公有
    String url = FileSystemClient.getPublicClient().upload(new File("/Users/jiangwei/readme.txt"));
    System.out.println(url);
-		
+
    //上传到全局私有空间
    url = FileSystemClient.getPrivateClient().upload("readme2.txt", new File("/Users/jiangwei/readme.txt"));
    //生成私有下载链接
    String downloadUrl = FileSystemClient.getPrivateClient().getDownloadUrl(url);
-		
+
    //上传到自定义空间
    url = FileSystemClient.getClient("report").upload(new File("/Users/jiangwei/report.xls"));
 }
