@@ -18,7 +18,13 @@ mvn clean package -DskipTests=true
 
 ### 项目部署
 
-**说明**：目前没有前后端分离所以rest API模块暂时用不上，无需部署。
+**说明**：
+  1. 目前没有前后端分离所以rest API模块暂时用不上，无需部署。
+  2. 以下演示`基础环境`(mysql、kafka、redis、zookeeper)和`配置中心`部署在阿里云
+  3. 如果需要使用本地基础环境，请修改每个模块配置项`jeesuite.configcenter.profile`为`local`
+     > 11
+  4. 如果需要本地搭建配置中心参考：[部署配置中心](./confcenter.md)
+
 
 * 步骤一：分别将以上构建的部署包拷贝到部署目录，如：/datas/deploy目录下。
 * 步骤二：部署dubbo服务
