@@ -17,9 +17,12 @@ mvn clean package -DskipTests=true
 * rest API:bestpl-rest/target/bestpl-rest.war
 
 ### 项目部署
+
 **说明**：目前没有前后端分离所以rest API模块暂时用不上，无需部署。
 
-   - 步骤一：分别将以上构建的部署包拷贝到部署目录，如：/datas/apps目录下。
+* 步骤一：分别将以上构建的部署包拷贝到部署目录，如：/datas/deploy目录下。
+* 步骤二：部署dubbo服务
+  ![](/assets/duubo-deploy-1.png)
 
 
 
