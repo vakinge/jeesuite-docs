@@ -38,3 +38,5 @@ mvn clean package -DskipTests=true
 
 启动成功后，访问：[http://127.0.0.1:8081/](http://127.0.0.1:8081/)  查看效果
 
+#### 首页效果
+![image](http://ojmezn0eq.bkt.clouddn.com/bestpl_snapshot.png)
