@@ -23,6 +23,7 @@ mvn clean package -DskipTests=true
   2. 以下演示`基础环境`(mysql、kafka、redis、zookeeper)和`配置中心`部署在阿里云
   3. 如果需要使用本地基础环境，请修改每个模块配置项`jeesuite.configcenter.profile`为`local`
      > 11
+     
   4. 如果需要本地搭建配置中心参考：[部署配置中心](./confcenter.md)
 
 
