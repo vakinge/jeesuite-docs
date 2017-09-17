@@ -32,6 +32,9 @@ mvn clean package -DskipTests=true
 ```
 
 * 步骤三：部署springboot
+  ```
+  nohup java -jar bestpl-springboot.jar > bestpl-springboot.out 2>&1 &
+  ```
 
-
+       启动成功后，访问：[http://127.0.0.1:8081/ 查看效果](http://127.0.0.1:8081/)
 
