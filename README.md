@@ -1,4 +1,4 @@
-### 定位
+### 简介
 
 Jeesuite 是一个java后台分布式架构开发套件。涵盖缓存、消息队列、db操作\(读写分离、分库路由、自动crud\)、定时任务、文件系统、api网关、配置中心、SSO统一认证平台、分布式锁、搜索、分布式日志、统一监控、快速集成dubbo、springboot等。
 
@@ -15,18 +15,22 @@ Jeesuite 是一个java后台分布式架构开发套件。涵盖缓存、消息�
 * 高度灵活、每个模块可以独立使用。
 
 ### 项目列表
- - 基础库
-  - [http://git.oschina.net/vakinge/jeesuite-libs](http://git.oschina.net/vakinge/jeesuite-libs)
-  - [https://github.com/vakinge/jeesuite-libs](https://github.com/vakinge/jeesuite-libs)
- - 配置中心
-  - [http://git.oschina.net/vakinge/jeesuite-config](http://git.oschina.net/vakinge/jeesuite-config)
-  - [https://github.com/vakinge/jeesuite-config](https://github.com/vakinge/jeesuite-config)
- - 统一认证中心
-  - [http://git.oschina.net/vakinge/jeesuite-passport](http://git.oschina.net/vakinge/jeesuite-passport)
-  - [https://github.com/vakinge/jeesuite-passport](https://github.com/vakinge/jeesuite-passport)
- - api网关
-  - [http://git.oschina.net/vakinge/jeesuite-apigateway](http://git.oschina.net/vakinge/jeesuite-apigateway)
-  - [https://github.com/vakinge/jeesuite-apigateway](https://github.com/vakinge/jeesuite-apigateway)
- - 应用监控平台
-  - [http://git.oschina.net/vakinge/jeesuite-admin](http://git.oschina.net/vakinge/jeesuite-admin)
-  - [https://github.com/vakinge/jeesuite-admin](https://github.com/vakinge/jeesuite-admin)
+
+* 基础库
+  * [http://git.oschina.net/vakinge/jeesuite-libs](http://git.oschina.net/vakinge/jeesuite-libs)
+  * [https://github.com/vakinge/jeesuite-libs](https://github.com/vakinge/jeesuite-libs)
+* 配置中心
+  * [http://git.oschina.net/vakinge/jeesuite-config](http://git.oschina.net/vakinge/jeesuite-config)
+  * [https://github.com/vakinge/jeesuite-config](https://github.com/vakinge/jeesuite-config)
+* 统一认证中心
+  * [http://git.oschina.net/vakinge/jeesuite-passport](http://git.oschina.net/vakinge/jeesuite-passport)
+  * [https://github.com/vakinge/jeesuite-passport](https://github.com/vakinge/jeesuite-passport)
+* api网关
+  * [http://git.oschina.net/vakinge/jeesuite-apigateway](http://git.oschina.net/vakinge/jeesuite-apigateway)
+  * [https://github.com/vakinge/jeesuite-apigateway](https://github.com/vakinge/jeesuite-apigateway)
+* 应用监控平台
+  * [http://git.oschina.net/vakinge/jeesuite-admin](http://git.oschina.net/vakinge/jeesuite-admin)
+  * [https://github.com/vakinge/jeesuite-admin](https://github.com/vakinge/jeesuite-admin)
+
+
+
