@@ -16,11 +16,10 @@ mvn clean package -DskipTests=true
 * springboot web：bestpl-springboot/target/bestpl-springboot.jar
 * rest API:bestpl-rest/target/bestpl-rest.war
 
-  ### 项目部署
+### 项目部署
+**说明**：目前没有前后端分离所以rest API模块暂时用不上，无需部署。
 
-  **说明**：目前没有前后端分离所以rest API模块暂时用不上，无需部署。
-
-1. 步骤一：分别将以上构建的部署包拷贝到部署目录，如：/datas/apps目录下。
+   - 步骤一：分别将以上构建的部署包拷贝到部署目录，如：/datas/apps目录下。
 
 
 
