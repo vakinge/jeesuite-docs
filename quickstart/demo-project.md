@@ -19,13 +19,22 @@ mvn clean package -DskipTests=true
 ### 项目部署
 
 **说明**：
-  - 目前没有前后端分离所以rest API模块暂时用不上，无需部署。
-  - 以下演示`基础环境`(mysql、kafka、redis、zookeeper)和`配置中心`部署在阿里云
-  - 如果需要使用本地基础环境，请修改每个模块配置项`jeesuite.configcenter.profile`为`local`
-     > 11
-     
-  - 如果需要本地搭建配置中心参考：[部署配置中心](./confcenter.md)
 
+* 目前没有前后端分离所以rest API模块暂时用不上，无需部署。
+* 以下演示`基础环境`\(mysql、kafka、redis、zookeeper\)和`配置中心`部署在阿里云
+* 如果需要使用本地基础环境，请修改每个模块配置项`jeesuite.configcenter.profile`为`local`
+
+  > redis：端口:6379，密码：123456
+  >
+  > mysql：database:bestpl\_db ，用户名：root，密码：123456
+  >
+  > kafka：端口：9092
+  >
+  > zookeeper：端口：2181
+
+* 如果需要本地搭建配置中心参考：[部署配置中心](./confcenter.md)
+
+---
 
 * 步骤一：分别将以上构建的部署包拷贝到部署目录，如：/datas/deploy目录下。
 * 步骤二：部署dubbo服务
@@ -46,4 +55,6 @@ mvn clean package -DskipTests=true
 启动成功后，访问：[http://127.0.0.1:8081/](http://127.0.0.1:8081/)  查看效果
 
 #### 首页效果
+
 ![image](http://ojmezn0eq.bkt.clouddn.com/bestpl_snapshot.png)
+
