@@ -60,12 +60,12 @@ jeesuite.configcenter.encrypt-keyStore-keyPassword=123456
 
 ### 配置中心新增配置
 
-1. 申请新增应用，分配账号
-2. 用分配账号登录[http://192.168.1.94:7777\(开发环境\)](http://192.168.1.94:7777)  新增配置即可。
-3. 测试
+1. 登录[http://${configserver}:7777\(开发环境\)](http://${configserver}:7777)，默认管理员账号密码：***admin/admin123***。
+2. 新增应用
+3. 新增对应应用及环境配置
 
 ```
-http://192.168.1.94:7777/api/fetch_all_configs?appName=${jeesuite.configcenter.appName}&env=dev&version=0.0.0
+http://${configserver}:7777/api/fetch_all_configs?appName=${jeesuite.configcenter.appName}&env=dev&version=0.0.0
 ```
 
 ### 普通spring项目配置xml
@@ -86,4 +86,31 @@ http://192.168.1.94:7777/api/fetch_all_configs?appName=${jeesuite.configcenter.a
 ```
 
 
+### 配置优先级
+1. 应用本地配置 > 远程应用配置 > 远程全局配置
+2. 配置中心配置`jeesuite.configcenter.remote-config-first=true`可以启用远程配置覆盖本地配置
+
+### 配置实时生效
+配置变更后会实时下发到应用，可以通过以下方式实时读取最新配置
+1. 在代码中使用`ResourceUtils`实时读取
+2. 依赖注入`Environment`，在代码中实时读取
+3. 实现`ConfigChangeHanlder`接口，自定义刷新逻辑
+```
+@Controller  
+@RequestMapping(value = "/sms")
+public class AuthCommonController implements ConfigChangeHanlder{
+
+	@Value("${sms.send.open}")
+	private boolean open = false;
+
+
+	@Override
+	public void onConfigChanged(Map<String, Object> changedConfigs) {
+		if(changedConfigs.containsKey("sms.send.open")){
+			open = Boolean.parseBoolean(changedConfigs.get("sms.send.open").toString());
+		}
+	}
+}
+
+```
 
