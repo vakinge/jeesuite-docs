@@ -8,3 +8,4 @@
   * [scheduler模块](jeesuite-libs/scheduler.md)
   * [filesystem模块](jeesuite-libs/filesystem.md)
   * [restAPI模块](jeesuite-libs/rest.md)
+  * [springboot-starter模块](jeesuite-libs/springboot-starter.md)
