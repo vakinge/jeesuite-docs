@@ -17,6 +17,7 @@
   * [scheduler模块](jeesuite-libs/scheduler.md)
   * [filesystem模块](jeesuite-libs/filesystem.md)
   * [restAPI模块](jeesuite-libs/rest.md)
+  * [springboot-starter模块](jeesuite-libs/springboot-starter.md)
 * [系统集成](integration.md)
   * [集成配置中心](integration/confcenter.md)
   * [集成认证中心](integration/apigateway.md)
