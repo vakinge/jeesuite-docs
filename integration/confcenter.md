@@ -97,7 +97,7 @@ http://${configserver}:7777/api/fetch_all_configs?appName=${jeesuite.configcente
 2. 依赖注入`Environment`，在代码中实时读取  
 3. 实现`ConfigChangeHanlder`接口，自定义刷新逻辑
 
-
+---
 
 ```java
 @Controller  
