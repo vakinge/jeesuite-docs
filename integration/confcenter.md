@@ -60,7 +60,7 @@ jeesuite.configcenter.encrypt-keyStore-keyPassword=123456
 
 ### 配置中心新增配置
 
-1. 登录[http://${configserver}:7777\(开发环境\)](http://${configserver}:7777)，默认管理员账号密码：***admin/admin123***。
+1. 登录[http://${configserver}:7777\(开发环境\)](http://${configserver}:7777)，默认管理员账号密码：_**admin/admin123**_。
 2. 新增应用
 3. 新增对应应用及环境配置
 
@@ -73,7 +73,7 @@ http://${configserver}:7777/api/fetch_all_configs?appName=${jeesuite.configcente
 1. 去掉原加载配置相关配置
 2. 新增配置
 
-```
+```xml
 <bean class="com.jeesuite.confcenter.spring.CCPropertyPlaceholderConfigurer">
     <property name="remoteEnabled" value="true" />
     <!-- 本地配置文件，无本地配置可不配置 -->
@@ -85,32 +85,37 @@ http://${configserver}:7777/api/fetch_all_configs?appName=${jeesuite.configcente
 </bean>
 ```
 
-
 ### 配置优先级
-1. 应用本地配置 > 远程应用配置 > 远程全局配置
+
+1. 应用本地配置 &gt; 远程应用配置 &gt; 远程全局配置
 2. 配置中心配置`jeesuite.configcenter.remote-config-first=true`可以启用远程配置覆盖本地配置
 
 ### 配置实时生效
-配置变更后会实时下发到应用，可以通过以下方式实时读取最新配置
-1. 在代码中使用`ResourceUtils`实时读取
-2. 依赖注入`Environment`，在代码中实时读取
+
+配置变更后会实时下发到应用，可以通过以下方式实时读取最新配置  
+1. 在代码中使用`ResourceUtils`实时读取  
+2. 依赖注入`Environment`，在代码中实时读取  
 3. 实现`ConfigChangeHanlder`接口，自定义刷新逻辑
-```
+
+
+
+```java
 @Controller  
 @RequestMapping(value = "/sms")
 public class AuthCommonController implements ConfigChangeHanlder{
 
-	@Value("${sms.send.open}")
-	private boolean open = false;
+    @Value("${sms.send.open}")
+    private boolean open = false;
 
 
-	@Override
-	public void onConfigChanged(Map<String, Object> changedConfigs) {
-		if(changedConfigs.containsKey("sms.send.open")){
-			open = Boolean.parseBoolean(changedConfigs.get("sms.send.open").toString());
-		}
-	}
+    @Override
+    public void onConfigChanged(Map<String, Object> changedConfigs) {
+        if(changedConfigs.containsKey("sms.send.open")){
+            open = Boolean.parseBoolean(changedConfigs.get("sms.send.open").toString());
+        }
+    }
 }
-
 ```
+
+
 
