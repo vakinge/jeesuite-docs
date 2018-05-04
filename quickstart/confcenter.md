@@ -14,9 +14,7 @@ mvn clean package -DskipTests=true
 
 ### 创建数据库表
 
-```
-CREATE DATABASE IF NOT EXISTS `configcenter` DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
-```
+    CREATE DATABASE IF NOT EXISTS `configcenter` DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
 导入db.sql
 
@@ -46,7 +44,7 @@ db.timeBetweenEvictionRunsMillis=60000
 db.minEvictableIdleTimeMillis=300000
 db.testOnBorrow=false
 db.testOnReturn=false
-master.db.url=jdbc:mysql://127.0.0.1:3306/jeesuite_config?useUnicode=true&amp;characterEncoding=UTF-8
+master.db.url=jdbc:mysql://127.0.0.1:3306/configcenter?useUnicode=true&amp;characterEncoding=UTF-8
 master.db.username=root
 master.db.password=root
 master.db.initialSize=2
