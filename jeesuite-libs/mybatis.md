@@ -119,6 +119,34 @@ group1.slave1.db.password=123456
 * 每个数据源的配置会覆盖全局配置
 * `db.group.size` 与 `db.shard.size` 都是分库用到配置，没有用到分库可以不配置
 
+##### mybais模块AOP
+
+如果使用了自动cache和读写分离插件，需要通过AOP做缓存回滚，和强制使用master生效。
+
+```java
+package ${project.base.package}.interceptor;
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import com.jeesuite.mybatis.spring.MybatisPluginBaseSpringInterceptor;
+
+
+@Aspect
+@Component
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
+public class MybatisPluginSpringInterceptor extends MybatisPluginBaseSpringInterceptor {
+
+	@Override
+	@Pointcut("execution(* ${project.base.package}.service.*.*(..))")
+	public void pointcut() {}
+
+}
+```
+
 ##### spring配置
 
 ```
