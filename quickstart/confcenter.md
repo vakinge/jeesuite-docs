@@ -74,5 +74,5 @@ cc.sync.zkServers=127.0.0.1:2181
 nohup java -jar jeesuite-config-server.jar > config-server.out 2>&1 &
 ```
 
-启动成功,打开[http://127.0.0.1:7777/index](http://127.0.0.1:7777/index) ，初始账号密码：admin /admin123
+启动成功,打开[http://127.0.0.1:19992](http://127.0.0.1:19992) ，初始账号密码：admin /admin123
 
