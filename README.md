@@ -17,20 +17,18 @@ Jeesuite 是一个java后台分布式架构开发套件。涵盖缓存、消息�
 ### 项目列表
 
 * 基础库
-  * [http://git.oschina.net/vakinge/jeesuite-libs](http://git.oschina.net/vakinge/jeesuite-libs)
+  * [http://gitee.com/vakinge/jeesuite-libs](http://gitee.com/vakinge/jeesuite-libs)
   * [https://github.com/vakinge/jeesuite-libs](https://github.com/vakinge/jeesuite-libs)
 * 配置中心
-  * [http://git.oschina.net/vakinge/jeesuite-config](http://git.oschina.net/vakinge/jeesuite-config)
+  * [http://gitee.com/vakinge/jeesuite-config](http://gitee.com/vakinge/jeesuite-config)
   * [https://github.com/vakinge/jeesuite-config](https://github.com/vakinge/jeesuite-config)
+* oneplatform企业级开发平台
+  * [http://gitee.com/vakinge/oneplatform](http://gitee.com/vakinge/oneplatform)
+  * [https://github.com/vakinge/oneplatform](https://github.com/vakinge/oneplatform)
 * 统一认证中心
-  * [http://git.oschina.net/vakinge/jeesuite-passport](http://git.oschina.net/vakinge/jeesuite-passport)
+  * [http://gitee.com/vakinge/jeesuite-passport](http://gitee.com/vakinge/jeesuite-passport)
   * [https://github.com/vakinge/jeesuite-passport](https://github.com/vakinge/jeesuite-passport)
-* api网关
-  * [http://git.oschina.net/vakinge/jeesuite-apigateway](http://git.oschina.net/vakinge/jeesuite-apigateway)
-  * [https://github.com/vakinge/jeesuite-apigateway](https://github.com/vakinge/jeesuite-apigateway)
-* 应用监控平台
-  * [http://git.oschina.net/vakinge/jeesuite-admin](http://git.oschina.net/vakinge/jeesuite-admin)
-  * [https://github.com/vakinge/jeesuite-admin](https://github.com/vakinge/jeesuite-admin)
+
 
 
 
