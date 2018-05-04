@@ -14,6 +14,10 @@ mvn clean package -DskipTests=true
 
 ### 创建数据库表
 
+```
+CREATE DATABASE IF NOT EXISTS `configcenter` DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+```
+
 导入db.sql
 
 ### 修改配置
