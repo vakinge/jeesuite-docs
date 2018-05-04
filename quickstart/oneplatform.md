@@ -1,83 +1,84 @@
-### 下载项目
-
+### 基础环境安装(最好是Linux环境，没有请安装虚拟机)
+ - mysql
+ - kafka
+ - zookeeper
+ - redis 
+ 
+使用docker：构建了一个基础环境docker（jdk8，redis，kafka，zookeeper）
 ```
-git clone https://git.oschina.net/vakinge/jeesuite-bestpl.git
-```
-
-### 编译项目
-
-```
-mvn clean package -DskipTests=true
-```
-
-**最终生成部署包为：**
-
-* dubbo服务:bestpl-dubbo/target/bestpl-dubbo-dist.zip
-* springboot web：bestpl-springboot/target/bestpl-springboot.jar
-* rest API:bestpl-rest/target/bestpl-rest.war
-
-### 项目部署
-
-**说明**：
-
-* 目前没有前后端分离所以rest API模块暂时用不上，无需部署。
-* 以下演示`基础环境`\(mysql、kafka、redis、zookeeper\)和`配置中心`部署在阿里云
-* 如果需要使用本地基础环境，请修改每个模块配置项`jeesuite.configcenter.profile`为`local`
-
-  > redis：端口:6379，密码：123456
-  >
-  > mysql：database:bestpl\_db ，用户名：root，密码：123456 ，脚本：doc/table.sql
-  >
-  > kafka：端口：9092
-  >
-  > zookeeper：端口：2181
-
-* 如果需要本地搭建配置中心参考：[部署配置中心](./confcenter.md)
-
----
-
-* 步骤一：分别将以上构建的部署包拷贝到部署目录，如：/datas/deploy目录下。
-* 步骤二：部署dubbo服务
-  ![](http://ojmezn0eq.bkt.clouddn.com/duubo-deploy-1.png)启动成功，如下：
-
-```
-2017-09-17 11:22:13.752 INFO [main][AppServer.java:31] - 启动app-server....
-==============================
-|---------服务启动成功----------|
-==============================
+mkdir -p /datas/redis
+mkdir -p /datas/kafka
+mkdir -p /datas/zookeeper
+mkdir -p /datas/logs
+mkdir -p /datas/config
+# /datas/config文件夹 包含：kafka.properties,zookeeper.properties,redis.conf
+#拉取并运行
+docker run -it --net="host" -p 6379:6379 -p 2181:2181 -p 9092:9092 -m 1024M --memory-swap=1024M -v /datas:/datas vakinge/centos_dev
 ```
 
-* 步骤三：部署springboot
-  ```
-  nohup java -jar bestpl-springboot.jar > bestpl-springboot.out 2>&1 &
-  ```
+#### 注
+ 1. mysql配置的的账号密码为：root/123456,redis密码:123456
+  
+### clone项目到本地
+git clone https://gitee.com/vakinge/oneplatform.git
 
-启动成功后，访问：[http://127.0.0.1:8081/](http://127.0.0.1:8081/)  查看效果
-
-#### 首页效果
-
-![image](http://ojmezn0eq.bkt.clouddn.com/bestpl_snapshot.png)
-
----
-
-### 基于docker发布
-
+### 创建数据库
 ```
-#切换到项目目录
-cd /你的项目目录/jeesuite-bestpl
-#打包，发布镜像到docker（下载镜像可能耗时很久）
-mvn clean install -DskipTests=true -Pdocker
-#启动
-docker-compose up -d
+CREATE DATABASE IF NOT EXISTS `oneplatform` DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 ```
 
----
+### 创建表
+分别导入`oneplatform-platform/db.sql`和`oneplatform-services/common-service/db.sql`
 
-### eclipse调试运行
 
-1. **dubbo**：运行`AppServer.java`
-2. **rest**:通过`mvn jetty:run`运行
-3. **springboot**：运行`Application.java` 
+ ### 配置host
+```
+127.0.0.1 www.oneplatform.com
+```
 
+ ### 配置Nginx
+ ```
+  server {
+        listen       80;
+        server_name  www.oneplatform.com;
+
+        charset utf-8;
+
+        location / {
+            #这里改成你项目本地路径
+            root /Users/jiangwei/project/oneplatform/oneplatform-ui-layui;
+            index index.html;
+        }
+
+        location /api {
+          proxy_pass http://127.0.0.1:8001/api;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+    }
+
+ ```
+ ### 配置完成，启动Nginx
+ 
+ ### 启动基础平台服务
+ 入口：oneplatform-platform/src/main/java/com/oneplatform/platform/ApplicationStarter.java
+ 
+  ### 启动common服务
+ 入口：oneplatform-services/common-service/src/main/java/com/oneplatform/common/ApplicationStarter.java
+ 
+ 
+ >启动完成，访问：http://www.oneplatform.com 
+ 
+ 
+ ---
+ ### 默认使用阿里云部署的配置中心和注册中心，如果需要本地启动
+ #### eureka服务
+ 
+  1. 测试直接在IDE通过main方法启动即可，入口：springcloud-eureka/src/main/java/com/jeesuite/springcloud/EurekaServerApplication.java
+  2. 启动成功。通过访问：http://127.0.0.1:19991 访问。账号密码：oneplatform/oneplatform2018
+
+#### 配置中心
+[配置中心部署文档](http://www.jeesuite.com/docs/quickstart/confcenter.html) 
 
 
