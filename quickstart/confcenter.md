@@ -26,7 +26,7 @@ mvn clean package -DskipTests=true
 
 ```
 spring.application.name=jeesuite-config-server
-server.port=7777
+server.port=19992
 
 mybatis.type-aliases-package=com.jeesuite.admin.dao.entity
 mybatis.mapper-locations=classpath:mapper/*Mapper.xml
@@ -55,8 +55,8 @@ master.db.maxActive=20
 api.extranet.enabled=true
 #是否启用安全ip
 safe.ipfilter.enabled=false
-#设置安全ip是安全码(相当于二次密码)
-safe.ipfilter.authcode=12345678
+#敏感操作安全码(相当于二次密码)
+sensitive.operation.authcode=12345678
 
 #如果需要rsa加密，配置公钥
 cc.encrypt.keyStore.location=/Users/jiangwei/configcenter.jks
